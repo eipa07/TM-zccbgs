@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: com.cuprum.zccbgs
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: DS4DEV_CLONING
+          url: http://vvhsvfds4ci.sap.cuprum.com:44300
+        app:
+          name: ZCCBGS
+          description: Fiori para ccbgs
+          package: zrtr_develop
+          transport: DS4K911084
+        exclude:
+          - /test/

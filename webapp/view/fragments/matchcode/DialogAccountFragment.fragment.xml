@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	-
+	<SelectDialog title="Cuenta" 
+		items="{/BankAccountSet}" 
+		class="sapUiPopupWithPadding" 
+		id="DialogAccountFragment"
+		search="_AccountSearch"
+		confirm="_AccountClose"
+		cancel="_AccountClose">
+		<StandardListItem title="{Hktid}" description="{Bankn}" iconInset="false" iconDensityAware="false" />
+	</SelectDialog>
+</core:FragmentDefinition> 

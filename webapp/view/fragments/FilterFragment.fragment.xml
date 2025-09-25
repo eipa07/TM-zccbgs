@@ -1,0 +1,116 @@
+<core:FragmentDefinition    xmlns:core="sap.ui.core" 
+                            xmlns:mvc="sap.ui.core.mvc" 
+                            xmlns="sap.m" 
+                            xmlns:l="sap.ui.layout"
+                            xmlns:html="http://www.w3.org/1999/xhtml"
+	                        xmlns:form="sap.ui.layout.form" 
+                            xmlns:tnt="sap.tnt">
+    <Page id="r1" showHeader="true" enableScrolling="false"  >
+        <VBox id="vboxId" alignItems="Center" direction="Column" fitContainer="false" width="80%" height="100%" justifyContent="Center" renderType="Div"
+			visible="true" displayInline="false" alignContent="Center" class="zHe">
+            <items>
+                
+                        <VBox id="vboxIdAccount" alignItems="Stretch" direction="Column" fitContainer="false" width="60%" height="auto"  renderType="Div"
+                        visible="true" displayInline="false" class="zEl">
+                            <items>
+                                <Label text="Cuenta Bancaría" labelFor="inAccount" />
+                                <Input
+                                    id="inAccount"
+                                    placeholder=""
+                                    showSuggestion="true"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".getAccountSetModel"
+                                    width="100%">
+                                    <suggestionItems>
+                                        <core:Item text="{Hktid}" id="itemId"/>
+                                    </suggestionItems>
+                                </Input>
+                            </items>
+                        </VBox>
+                        <VBox id="vboxSpaceone" alignItems="Stretch" direction="Column" fitContainer="false" width="100%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                        <items>
+                            <Label text=""/>
+                        </items>
+                        </VBox>
+                        <VBox id="vboxIdCompany" alignItems="Stretch" direction="Column" fitContainer="false" width="60%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                            <items>
+                                <Label text="Sociedad" labelFor="inCompany" />
+                                <Input
+                                    id="inCompany"
+                                    placeholder=""
+                                    showSuggestion="true"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".getCompanySetModel"
+                                    width="100%">
+                                    <suggestionItems>
+                                        <core:Item text="{Bukrs}" id="itemIdd"/>
+                                    </suggestionItems>
+                                </Input>
+                            </items>
+                        </VBox>
+                        <VBox id="vboxSpacetwo" alignItems="Stretch" direction="Column" fitContainer="false" width="100%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                        <items>
+                            <Label text=""/>
+                        </items>
+                        </VBox>
+                        <VBox id="vboxIdMonth" alignItems="Stretch" direction="Column" fitContainer="false" width="60%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                            <items>
+                                <Label text="Período" labelFor="inMonth" width="100%"/>
+                                <ComboBox id="inMonth" width="100%">
+                                    <core:Item key="01" text="01" />
+                                    <core:Item key="02" text="02" />
+                                    <core:Item key="03" text="03" />
+                                    <core:Item key="04" text="04" />
+                                    <core:Item key="05" text="05" />
+                                    <core:Item key="06" text="06" />
+                                    <core:Item key="07" text="07" />
+                                    <core:Item key="08" text="08" />
+                                    <core:Item key="09" text="09" />
+                                    <core:Item key="10" text="10" />
+                                    <core:Item key="11" text="11" />
+                                    <core:Item key="12" text="12" />
+                                </ComboBox>
+                            </items>
+                        </VBox>
+
+                        <VBox id="vboxIdYear" alignItems="Stretch" direction="Column" fitContainer="false" width="60%" height="auto" justifyContent="Center" renderType="Div"
+                            visible="true" displayInline="false" alignContent="Center">
+                            <Label text="Año" labelFor="Gjahr" width="100%"/>
+                            <ComboBox id="inYear" width="100%" selectionChange="onYearSelect" items="{/}">
+                                <items>
+                                    <core:Item key="{key}" text="{text}"/>
+                                </items>
+                            </ComboBox>
+                        </VBox>
+
+
+                        
+                        <VBox id="vboxSpacethree" alignItems="Stretch" direction="Column" fitContainer="false" width="100%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                        <items>
+                            <Label text=""/>
+                        </items>
+                        </VBox>
+                        <VBox id="vboxButton" alignItems="Stretch" direction="Column" fitContainer="false" width="60%" height="auto" justifyContent="Center" renderType="Div"
+                        visible="true" displayInline="false" alignContent="Center">
+                            <items>
+                                <Button text="Consulta PDF"
+                                        press="getCCBSetModel"
+                                        ariaDescribedBy="defaultButtonDescription genericButtonDescription" 
+                                        width="100%"
+                                        type="Emphasized">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Button>
+                            </items>
+                        </VBox>
+                   
+            </items>
+        </VBox>
+    </Page>
+</core:FragmentDefinition>

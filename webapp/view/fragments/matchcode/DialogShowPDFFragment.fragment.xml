@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	-
+	<Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="PDF" type="Standard" verticalScrolling="true" id="DialogShowPDF">
+        <content>
+            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" 
+	        			displayInline="false" class="sapUiMediumMarginTop sapUiMediumMarginBottom sapUiTinyMarginBegin sapUiTinyMarginEnd">
+                <items>
+                    <HBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                        <items>
+                        	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true">
+                                <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">  
+                                    <PDFViewer source="{/Source}"  title="PDF" height="100%">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                    </PDFViewer>
+                                </FlexBox>
+                            </ScrollContainer>
+			            </items>
+                        <layoutData/>
+                    </HBox>
+                </items>
+                <layoutData/>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition> 

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZZ1_CCB_GS_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Ccb_Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotDCero" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotDOne" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotDTwo" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ejercicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bankn" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Cuenta bancaria" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sdate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Edate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sbalance" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ebalance" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sumcon" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ebalancec" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="hkont_cero" Relationship="ZZ1_CCB_GS_SRV.Head_to_det_cero" FromRole="FromRole_Head_to_det_cero" ToRole="ToRole_Head_to_det_cero"/>
+                <NavigationProperty Name="hkont_one" Relationship="ZZ1_CCB_GS_SRV.Head_to_det_one" FromRole="FromRole_Head_to_det_one" ToRole="ToRole_Head_to_det_one"/>
+                <NavigationProperty Name="hkont_two" Relationship="ZZ1_CCB_GS_SRV.Head_to_det_two" FromRole="FromRole_Head_to_det_two" ToRole="ToRole_Head_to_det_two"/>
+            </EntityType>
+            <EntityType Name="Tblcero" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ejercicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bldat" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha documento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fcsl" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Tblone" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ejercicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bldat" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha documento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fcsl" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Tbltwo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ejercicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bldat" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha documento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fcsl" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Importe en mon.func." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Pdf_Stream" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rawstring" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="XString" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Pdf_Xs" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Hktid"/>
+                    <PropertyRef Name="Monat"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Base64" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Cadena de caracteres" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Monat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Período" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rawstring" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="XString" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Company" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Butxt" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Nombre soc.GL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Account" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Hktid"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hktid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="ID de cuenta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bankn" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Cuenta bancaria" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Head_to_det_one" sap:content-version="1">
+                <End Type="ZZ1_CCB_GS_SRV.Ccb_Header" Multiplicity="1" Role="FromRole_Head_to_det_one"/>
+                <End Type="ZZ1_CCB_GS_SRV.Tblone" Multiplicity="*" Role="ToRole_Head_to_det_one"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Head_to_det_one">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Head_to_det_one">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Head_to_det_two" sap:content-version="1">
+                <End Type="ZZ1_CCB_GS_SRV.Ccb_Header" Multiplicity="1" Role="FromRole_Head_to_det_two"/>
+                <End Type="ZZ1_CCB_GS_SRV.Tbltwo" Multiplicity="*" Role="ToRole_Head_to_det_two"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Head_to_det_two">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Head_to_det_two">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Head_to_det_cero" sap:content-version="1">
+                <End Type="ZZ1_CCB_GS_SRV.Ccb_Header" Multiplicity="1" Role="FromRole_Head_to_det_cero"/>
+                <End Type="ZZ1_CCB_GS_SRV.Tblcero" Multiplicity="*" Role="ToRole_Head_to_det_cero"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Head_to_det_cero">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Head_to_det_cero">
+                        <PropertyRef Name="Bukrs"/>
+                        <PropertyRef Name="Hktid"/>
+                        <PropertyRef Name="Monat"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZZ1_CCB_GS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Ccb_HeaderSet" EntityType="ZZ1_CCB_GS_SRV.Ccb_Header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="TblceroSet" EntityType="ZZ1_CCB_GS_SRV.Tblcero" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="TbloneSet" EntityType="ZZ1_CCB_GS_SRV.Tblone" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="TbltwoSet" EntityType="ZZ1_CCB_GS_SRV.Tbltwo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="PDF_STREAMSet" EntityType="ZZ1_CCB_GS_SRV.Pdf_Stream" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Pdf_XsSet" EntityType="ZZ1_CCB_GS_SRV.Pdf_Xs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="CompanySet" EntityType="ZZ1_CCB_GS_SRV.Company" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="AccountSet" EntityType="ZZ1_CCB_GS_SRV.Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Det_CeroSet" Association="ZZ1_CCB_GS_SRV.Head_to_det_cero" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Ccb_HeaderSet" Role="FromRole_Head_to_det_cero"/>
+                    <End EntitySet="TblceroSet" Role="ToRole_Head_to_det_cero"/>
+                </AssociationSet>
+                <AssociationSet Name="Det_TwoSet" Association="ZZ1_CCB_GS_SRV.Head_to_det_two" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Ccb_HeaderSet" Role="FromRole_Head_to_det_two"/>
+                    <End EntitySet="TbltwoSet" Role="ToRole_Head_to_det_two"/>
+                </AssociationSet>
+                <AssociationSet Name="Det_OneSet" Association="ZZ1_CCB_GS_SRV.Head_to_det_one" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Ccb_HeaderSet" Role="FromRole_Head_to_det_one"/>
+                    <End EntitySet="TbloneSet" Role="ToRole_Head_to_det_one"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://vvhsvfds4ci.sap.cuprum.com:44300/sap/opu/odata/sap/ZZ1_CCB_GS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://vvhsvfds4ci.sap.cuprum.com:44300/sap/opu/odata/sap/ZZ1_CCB_GS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

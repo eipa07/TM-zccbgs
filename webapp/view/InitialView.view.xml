@@ -1,0 +1,14 @@
+<mvc:View controllerName="com.cuprum.zccbgs.controller.InitialView"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            
+            <Panel id="fragmentContent"  height="100%" >
+                <!--Contenedor para los fragments-->
+                <layoutData/>
+            </Panel>
+            
+        </content>
+    </Page>
+</mvc:View>

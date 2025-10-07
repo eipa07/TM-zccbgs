@@ -107,6 +107,15 @@
                                         <FlexItemData growFactor="1" />
                                     </layoutData>
                                 </Button>
+                                <Button text="Exportar Excel"
+        press=".onExportExcel"
+        width="100%"
+        icon="sap-icon://excel-attachment">
+  <layoutData>
+    <FlexItemData growFactor="1" />
+  </layoutData>
+</Button>
+
                             </items>
                         </VBox>
                    

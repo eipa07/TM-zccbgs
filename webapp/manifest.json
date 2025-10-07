@@ -24,6 +24,15 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "ZZ1_CCB_OD_XLS_CDS": {
+        "uri": "/sap/opu/odata/sap/ZZ1_CCB_OD_XLS_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -82,7 +91,14 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": { }
+      },
+      "ZZ1_CCB_OD_XLS_CDS": {
+        "dataSource": "ZZ1_CCB_OD_XLS_CDS",
+        "preload": true,
+        "settings": {
+          "useBatch" : false
+        }
       }
     },
     "resources": {

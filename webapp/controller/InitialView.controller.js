@@ -10,9 +10,14 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/m/PDFViewer",
 	"sap/m/ComboBox",
+	"sap/ui/core/BusyIndicator",
+	"sap/ui/export/Spreadsheet",
+	"sap/ui/export/library"
 ],
-	function (Controller, OdataUtilities, ODataModel, JSONModel, Fragment, MessageToast, MessageBox, Filter, FilterOperator, ComboBox, PDFViewer) {
+	function (Controller, OdataUtilities, ODataModel, JSONModel, Fragment, MessageToast, MessageBox, Filter, FilterOperator, PDFViewer, ComboBox, BusyIndicator, Spreadsheet, library) {
 		"use strict";
+
+		const EdmType = library.EdmType;
 
 		return Controller.extend("com.cuprum.zccbgs.controller.InitialView", {
 			onInit: function () {
@@ -25,7 +30,7 @@ sap.ui.define([
 				var startYear = 2000;
 				var yearRange = [];
 
-				
+
 				for (var i = startYear; i <= currentYear + 10; i++) {
 					yearRange.push({
 						key: i.toString(),
@@ -33,13 +38,13 @@ sap.ui.define([
 					});
 				}
 
-				console.log(yearRange);  
+				console.log(yearRange);
 
-				
+
 				var oYearModel = new JSONModel(yearRange);
 				this.getView().byId("inYear").setModel(oYearModel);
-			
-		},
+
+			},
 			onYearSelect: function (oEvent) {
 				var selectedYear = oEvent.getParameter("selectedItem").getKey();
 				console.log("Año seleccionado: " + selectedYear);
@@ -319,6 +324,144 @@ sap.ui.define([
 				}
 				evt.getSource().getBinding("items").filter([]);
 			}*/
+
+
+
+
+			/**
+			* Handler del botón: lee datos (o usa tu modelo local) y exporta
+			*/
+			onExportExcel: async function () {
+				try {
+					BusyIndicator.show(0);
+
+					let oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+					// 1) OBTENER LOS DATOS
+					let oBukrs = this.getView().byId("inCompany").getValue();
+					let oHktid = this.getView().byId("inAccount").getValue();
+					let oMonat = this.getView().byId("inMonth").getSelectedKey();
+					let oGjahr = this.getView().byId("inYear").getSelectedKey();
+					let oCmonth = parseInt(oMonat);
+					let oCyear = parseInt(oGjahr);
+
+					let sUrl = "/zz1_ccb_od_xls?$filter=bukrs eq '" + oBukrs +
+						"' and hktid eq '" + oHktid +
+						"' and monat le '" + oMonat +
+						"' and gjahr le '" + oGjahr +
+						"' and ( cmonth gt " + oCmonth + " or cyear gt " + oCyear + " )";
+					// console.log("sUrl:", sUrl);
+
+					let aRaw = await this._readOnce(sUrl);
+
+					if (!aRaw.length) {
+						MessageToast.show(oBundle.getText("excel.noData"));
+						return;
+					}
+
+					// 2) TRANSFORMAR
+					let aRows = aRaw.map(r => ({
+						[oBundle.getText("excel.col.fecha")]: this._parseSapDate(r.bldat),
+						[oBundle.getText("excel.col.documento")]: r.belnr || "",
+						[oBundle.getText("excel.col.prctr")]: r.prctr || "",
+						[oBundle.getText("excel.col.importe")]: this._toNumber(r.monto),
+						[oBundle.getText("excel.col.moneda")]: r.waers || "",
+						[oBundle.getText("excel.col.descripcion")]: r.sgtxt || ""
+					}));
+
+					// 3) DEFINIR COLUMNAS (usa el módulo importado)
+					let EdmType = library.EdmType; // 👈 ojo aquí
+					let aColumns = [
+						{ label: oBundle.getText("excel.col.fecha"), property: oBundle.getText("excel.col.fecha"), type: EdmType.Date },
+						{ label: oBundle.getText("excel.col.documento"), property: oBundle.getText("excel.col.documento"), type: EdmType.String },
+						{ label: oBundle.getText("excel.col.prctr"), property: oBundle.getText("excel.col.prctr"), type: EdmType.String },
+						{ label: oBundle.getText("excel.col.importe"), property: oBundle.getText("excel.col.importe"), type: EdmType.Number, scale: 2 },
+						{ label: oBundle.getText("excel.col.moneda"), property: oBundle.getText("excel.col.moneda"), type: EdmType.String },
+						{ label: oBundle.getText("excel.col.descripcion"), property: oBundle.getText("excel.col.descripcion"), type: EdmType.String }
+					];
+
+					// 4) GENERAR EXCEL (usa el símbolo importado)
+					let oSettings = {
+						workbook: { columns: aColumns },
+						dataSource: aRows,
+						fileName: this._excelFileName(oBundle.getText("excel.filename"))
+					};
+
+					let oSheet = new Spreadsheet(oSettings);
+					await oSheet.build();
+					oSheet.destroy();
+
+					MessageToast.show(oBundle.getText("excel.success"));
+				} catch (e) {
+					// eslint-disable-next-line no-console
+					console.error("[onExportExcel]", e);
+					let oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+					MessageToast.show(oBundle.getText("excel.error"));
+				} finally {
+					BusyIndicator.hide();
+				}
+			},
+
+
+
+			/**
+			 * Lee una colección OData una sola vez y devuelve un arreglo plano (results)
+			 * Ajusta el modelo (por nombre) y parámetros según tu servicio
+			 */
+			_readOnce: function (sPath) {
+				let oModel = this.getView().getModel("ZZ1_CCB_OD_XLS_CDS"); // ajusta el nombre
+				return new Promise((resolve, reject) => {
+					oModel.read(sPath, {
+						urlParameters: { "$format": "json" },
+						success: (oData) => {
+							// OData V2: puede venir como { results: [...] } o directo según config
+							let oResponse = (oData && (oData.results || oData.d?.results)) || [];
+							console.log("oResponse", oResponse)
+							resolve(oResponse);
+						},
+						error: reject
+					});
+				});
+			},
+
+			/**
+			 * Convierte "/Date(1743465600000)/" a JS Date
+			 */
+			_parseSapDate: function (sSapDate) {
+				if (!sSapDate || typeof sSapDate !== "string") return null;
+				// Extrae milisegundos del literal ABAP
+				let m = /Date\((\d+)\)/.exec(sSapDate);
+				if (!m) return null;
+				// Crea Date con esos ms (UTC). Excel usará sólo la parte de fecha.
+				let n = Number(m[1]);
+				if (Number.isNaN(n)) return null;
+				return new Date(n);
+			},
+
+			/**
+			 * Convierte string numérico a Number (p.ej. "-40800.60")
+			 */
+			_toNumber: function (v) {
+				if (v === null || v === undefined) return null;
+				let n = Number(String(v).replace(/,/g, "")); // por si viniera con comas
+				return Number.isNaN(n) ? null : n;
+			},
+
+			/**
+			 * Genera nombre de archivo con timestamp
+			 */
+			_excelFileName: function (base) {
+				let pad = (x) => String(x).padStart(2, "0");
+				let d = new Date();
+				let y = d.getFullYear();
+				let mo = pad(d.getMonth() + 1);
+				let da = pad(d.getDate());
+				let hh = pad(d.getHours());
+				let mm = pad(d.getMinutes());
+				let ss = pad(d.getSeconds());
+				return `${base}_${y}${mo}${da}_${hh}${mm}${ss}.xlsx`;
+			}
+
 
 
 		});

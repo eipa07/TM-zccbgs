@@ -40,3 +40,7 @@ App CCB
 1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
 
 
+Historial OT's
+
+1. DS4K911084 PINA FIORI - 5099 - PTP - Conciliacion Bancaria
+2. 

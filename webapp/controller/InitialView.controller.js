@@ -383,7 +383,7 @@ sap.ui.define([
 
 					// 🔄 Paso 4: Transformar estructura de datos a formato Excel
 					let aRows = aRaw.map(r => ({
-						[oBundle.getText("excel.col.fecha")]: r.bldat, //this._parseSapDate(r.bldat),
+						[oBundle.getText("excel.col.fecha")]: r.bldat, 
 						[oBundle.getText("excel.col.documento")]: r.belnr || "",
 						[oBundle.getText("excel.col.prctr")]: r.prctr || "",
 						[oBundle.getText("excel.col.importe")]: this._toNumber(r.monto),
@@ -484,52 +484,7 @@ sap.ui.define([
 				let mm = pad(d.getMinutes());
 				let ss = pad(d.getSeconds());
 				return `${base}_${y}${mo}${da}_${hh}${mm}${ss}.xlsx`;
-			},
-
-			/**
- * Convierte fechas SAP o JS Date a formato "dd/MM/yyyy"
- * Admite:
- *  - /Date(1711920000000)/  (formato OData clásico)
- *  - Objeto Date (Mon Mar 31 2025 18:00:00 GMT-0600)
- *  - String ISO (2025-03-31T18:00:00Z)
- */
-			_parseSapDate: function (vDate) {
-				try {
-					if (!vDate) return "";
-
-					let oDate;
-
-					// Caso 1: formato OData /Date(1711920000000)/
-					if (typeof vDate === "string" && vDate.indexOf("/Date(") === 0) {
-						let iTimestamp = parseInt(vDate.replace(/[^0-9]/g, ""), 10);
-						oDate = new Date(iTimestamp);
-					}
-					// Caso 2: ya es Date
-					else if (vDate instanceof Date) {
-						oDate = vDate;
-					}
-					// Caso 3: string tipo "Mon Mar 31 2025 18:00:00 GMT-0600"
-					else if (typeof vDate === "string" && vDate.includes("GMT")) {
-						oDate = new Date(vDate);
-					}
-					// Caso 4: string ISO "2025-03-31T00:00:00Z"
-					else {
-						oDate = new Date(vDate);
-					}
-
-					if (isNaN(oDate.getTime())) return "";
-
-					let dd = String(oDate.getDate()).padStart(2, "0");
-					let mm = String(oDate.getMonth() + 1).padStart(2, "0");
-					let yyyy = oDate.getFullYear();
-
-					return `${dd}/${mm}/${yyyy}`;
-				} catch (e) {
-					console.warn("Error al formatear fecha:", vDate, e);
-					return "";
-				}
-			},
-
+			}
 
 
 

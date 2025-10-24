@@ -346,8 +346,8 @@ sap.ui.define([
 
 					// 🧩 Paso 1: Obtener valores desde la vista
 					let oBukrs = this.getView().byId("inCompany").getValue(); // 4000
-					let oHktid = this.getView().byId("inAccount").getValue(); // 63019 | 33068
-					let oMonat = this.getView().byId("inMonth").getSelectedKey(); // 04 | 02
+					let oHktid = this.getView().byId("inAccount").getValue(); // 63019
+					let oMonat = this.getView().byId("inMonth").getSelectedKey(); // 04
 					let oGjahr = this.getView().byId("inYear").getSelectedKey(); // 2025
 					let oCmonth = parseInt(oMonat);
 					let oCyear = parseInt(oGjahr);
@@ -383,7 +383,7 @@ sap.ui.define([
 
 					// 🔄 Paso 4: Transformar estructura de datos a formato Excel
 					let aRows = aRaw.map(r => ({
-						[oBundle.getText("excel.col.fecha")]: r.bldat, //this._parseSapDate(r.bldat),
+						[oBundle.getText("excel.col.fecha")]: this._parseSapDate(r.bldat),
 						[oBundle.getText("excel.col.documento")]: r.belnr || "",
 						[oBundle.getText("excel.col.prctr")]: r.prctr || "",
 						[oBundle.getText("excel.col.importe")]: this._toNumber(r.monto),

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/base/Object","sap/m/MessageBox","sap/ui/model/json/JSONModel"],function(e,t,o){"use strict";return e.extend("com.cuprum.zccbgs.js.utilities.OdataUtilities",{constructor:function(){},setAccountSetModel:function(e,t){var o=e;var n=t;var s=o.getView().getModel("oMCCBCatalog");console.log(o.getView());return new Promise(function(e,t){s.read("/AccountSet",{filters:n,success:jQuery.proxy(function(t){e(t)},o),error:jQuery.proxy(function(e){t(e)},o)})})}})});
+//# sourceMappingURL=OdataUtilities.js.map

@@ -14,12 +14,12 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          destination: DS4DEV_CLONING
+          destination: DS4DEV
           url: http://vvhsvfds4ci.sap.cuprum.com:44300
         app:
           name: ZCCBGS
           description: Fiori para ccbgs
           package: zrtr_develop
-          transport: DS4K911084
+          transport: DS4K920342
         exclude:
           - /test/

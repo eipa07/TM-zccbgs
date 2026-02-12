@@ -1,5 +1,5 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"com/cuprum/zccbgs/controller/BaseController",
 	"com/cuprum/zccbgs/js/utilities/OdataUtilities",
 	"sap/ui/model/odata/v2/ODataModel",
 	"sap/ui/model/json/JSONModel",
@@ -14,12 +14,12 @@ sap.ui.define([
 	"sap/ui/export/Spreadsheet",
 	"sap/ui/export/library"
 ],
-	function (Controller, OdataUtilities, ODataModel, JSONModel, Fragment, MessageToast, MessageBox, Filter, FilterOperator, PDFViewer, ComboBox, BusyIndicator, Spreadsheet, library) {
+	function (BaseController, OdataUtilities, ODataModel, JSONModel, Fragment, MessageToast, MessageBox, Filter, FilterOperator, PDFViewer, ComboBox, BusyIndicator, Spreadsheet, library) {
 		"use strict";
 
 		const EdmType = library.EdmType;
 
-		return Controller.extend("com.cuprum.zccbgs.controller.InitialView", {
+		return BaseController.extend("com.cuprum.zccbgs.controller.InitialView", {
 			onInit: function () {
 				var frgForm = "com.cuprum.zccbgs.view.fragments.FilterFragment";
 				this.fragmentFormType = sap.ui.xmlfragment(this.getView().getId(), frgForm, this);
